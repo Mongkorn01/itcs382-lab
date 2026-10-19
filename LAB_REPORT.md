@@ -38,23 +38,58 @@ Table 1. SonarQube issues in the starter code
 
 | Item | Value |
 | --- | --- |
-| Date | |
-| AI tool and exact model | |
-| Commit reviewed | |
-| How the AI read the files (attached the files, opened the folder, or pasted the files) | |
-| Output file in the reviews folder | |
+| Date | 19 October 2026 |
+| AI tool and exact model | ChatGPT (GPT-6) |
+| Commit reviewed | 7ddd72a (HEAD -> main, origin/main) Task 1 |
+| How the AI read the files (attached the files, opened the folder, or pasted the files) | attached the files |
+| Output file in the reviews folder | Yes (/reviews/parcelpoint-review.md)|
 
 Table 2. All findings on the starter code
 
 | No. | File:line | Finding | Found by (SonarQube, AI or both) | SonarQube rule or course term | Correct? (yes or no, and why) |
 | --- | --- | --- | --- | --- | --- |
-| 1 | | | | | |
+| 1 | `Main.java:9` | Replace this use of `System.out` by a logger. | SonarQube | `java:S106` |No, "System.out.println" works just fine.|
+| 2 | `Main.java:15` | Replace this use of `System.out` by a logger. | SonarQube | `java:S106` |No, "System.out.println" works just fine.|
+| 3 | `Main.java:17` | Replace this use of `System.out` by a logger. | SonarQube | `java:S106` |No, "System.out.println" works just fine.|
+| 4 | `Main.java:22` | Replace this use of `System.out` by a logger. | SonarQube | `java:S106` |No, "System.out.println" works just fine.|
+| 5 | `ParcelService.java:6` | Remove this unused import `java.util.Date`. | SonarQube | `java:S1128` |Yes, it is not used.|
+| 6 | `ParcelService.java:12` | Remove this unused `maxParcels` private field. | Both | `java:S1068` |Yes, it is not used.|
+| 7 | `ParcelService.java:30` | Replace this use of `System.out` by a logger. | SonarQube | `java:S106` |No,"System.out.println" works just fine.|
+| 8 | `ParcelService.java:42` | Strings and Boxed types should be compared using `equals()`. | Both |`java:S4973` |Yes, strings compare uses equals()|
+| 9 | `ParcelService.java:67` | Replace this use of `System.out` by a logger. | SonarQube | `java:S106` |No, "System.out.println" works just fine.|
+| 10 | `ParcelService.java:69` | Replace this use of `System.out` by a logger. | SonarQube | `java:S106` |No, "System.out.println" works just fine.|
+| 11 | `ParcelService.java:76` | Use try-with-resources or close this `FileWriter` in a `finally` clause. |Both | `java:S2095` |Yes,the file writer is not closed.|
+| 12 | `ParcelService.java:80` | Remove this block of code, fill it in, or add a comment explaining why it is empty. | Both | `java:S108` |Yes, it is better if there is an explanation.|
+| 13 | `ParcelService.java:28,44,68` | Parcel statuses are represented by repeated string literals, making spelling inconsistencies and invalid states easier to introduce. | AI | Connascence of convention |Yes, this makes it harder to make changes|
+| 14 | `ParcelService.java:30–32` | `storeParcel` combines locker allocation, parcel-state changes, notification, persistence, and returning the result. | AI | Method cohesion / Single responsibility |Yes, the functions should do only one thing.|
+| 15 | `Main.java:11–17` | The command parser assumes valid input lengths and numeric arguments, so malformed commands can cause index errors or `NumberFormatException`. | AI | Input validation / Robustness |Yes, it is missing input validation.|
+| 16 | `Main.java:11` | Splitting input on a single space does not robustly handle repeated spaces or empty input. | AI | Input parsing / Robustness |Yes, the program might not work as intended|
+| 17 | `ParcelService.java:76–80` | `saveToFile` overwrites `parcels.csv` but silently discards write errors, so persistence failures can go unnoticed. | AI | Error handling |Yes, it overwrites the file.|
+| 18 | `ParcelService.java:64–71` | `printParcels` mixes two display behaviors selected by a boolean parameter. | AI | Logical cohesion |Yes, the parameter determines the behaviour.|
+| 19 | `ParcelService.java:39–48` | `pickUp` removes a parcel from its locker before calculating and returning the fee, combining state changes with billing logic. | AI | Method cohesion / Separation of concerns |Yes, a function should do only one behaviour|
+| 20 | `Main.java:6–26` | `main` combines command parsing, object creation, service calls, output, and loop termination. | AI | Procedural cohesion |Yes, the behaviour cares about sequence |
+| 21 | `ParcelService.java:24–36` | `storeParcel` sequences allocation, status updates, notification, persistence, and returning. | AI | Procedural cohesion | Yes, the behaviour cares about sequence |
+| 22 | `ParcelService.java:64–71` | `printParcels` selects between two display operations based on `forStaff`. | AI | Logical cohesion | Yes, 2 beheavior depends on if-else|
+| 23 | `ParcelService.java:9–80` | `ParcelService` combines locker allocation, parcel tracking, fee calculation, notifications, console output, and file persistence. | AI | Weak class cohesion |Yes, the class does unrelated tasks|
+| 24 | `Main.java:19–22` | `Main` accesses the locker collection through `ParcelService.getLockers()` and inspects individual lockers. | AI | Coupling / Law of Demeter | Yes, it access other files|
+| 25 | `Main.java:20–21`, `ParcelService.java:64–71` | The `forStaff` boolean determines which display behavior the service performs. | AI | Control coupling |Yes, 2 different behaviours with if-else|
+| 26 | `ParcelService.java:27–28,43–44,67–68`, `Parcel.java:7` | `ParcelService` directly accesses and modifies the public `Parcel.status` field. | AI | Encapsulation / Content coupling |Yes, it should not access attribute directly|
+| 27 | `ParcelService.java:26–28`, `Locker.java:25–26` | `ParcelService` passes a complete `Parcel` object to `Locker`. | AI | Stamp coupling |Yes, it only uses some of the available information|
+| 28 | `ParcelService.java:28,44,68`, `Parcel.java:13` | Status values depend on matching string literals across classes and methods. | AI | Connascence of convention |Yes, it uses a string with different semantics|
+| 29 | `Locker.java:5`, `Parcel.java:6`, `ParcelService.java:26,56–61`, `Main.java:9` | Locker and parcel sizes use numeric codes whose meanings must remain consistent across several locations. | AI | Connascence of convention |Yes,the number to meaning must be remembered|
+| 30 | `ParcelService.java:20–21` | `getLockers` returns the mutable internal collection, allowing callers to add or remove lockers. | AI | Encapsulation / Mutable collection exposure |Yes, it returns a whole list, allowing modifications.|
+| 31 | `Parcel.java:7` | The `status` field is public, allowing callers to assign arbitrary values and bypass state validation. | AI | Encapsulation |Yes, it is modification if refers directly|
 
 2.1 Name two problems that only the AI review found.
+1. ParcelService's saveToFile will overwrite the csv file.
+2. Main and ParcelService.java has low quality design for cohesion and coupling.
 
 2.2 Name one problem that only SonarQube found, or write none.
+1. java.util.Date was not used
+
 
 2.3 Name one AI finding that was wrong or too vague, and explain why. If every finding was right, explain how you checked them.
+1. Every finding was right. Most of the AI answers were design problems, so I checked the for the right level of coupling and cohesion from our lecture.
 
 ## Task 3. Fix and check
 
