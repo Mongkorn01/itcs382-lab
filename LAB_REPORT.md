@@ -1,26 +1,38 @@
 # Lab Report, Code Quality and Design Quality
 
-Repository URL:
+Repository URL: https://github.com/Mongkorn01/itcs382-lab
 
 ## Tools
 
 | Item | Version or name |
 | --- | --- |
-| JDK | |
-| Maven | |
-| IDE | |
-| SonarQube for IDE | |
+| JDK | 17.0.20.1 |
+| Maven |  3.10.0 |
+| IDE | VS Code |
+| SonarQube for IDE | v6.1.1 |
 | AI tool and exact model | |
 
 ## Task 1. SonarQube on the starter code
 
-Commit of the starter, before any change:
+Commit of the starter, before any change: 7c2d9c1 (HEAD -> main, origin/main) Starter code
 
 Table 1. SonarQube issues in the starter code
 
 | No. | Rule | File:line | Message |
 | --- | --- | --- | --- |
-| 1 | | | |
+| 1 | sonarqube(java:S106)| Main.java:9 | Replace this use of System.out by a logger. |
+| 2 | sonarqube(java:S106)| Main.java:15 | Replace this use of System.out by a logger. |
+| 3 | sonarqube(java:S106)| Main.java:17 | Replace this use of System.out by a logger. |
+| 4 | sonarqube(java:S106)| Main.java:22 | Replace this use of System.out by a logger. |
+| 5 | sonarqube(java:S2143)| ParcelService.java:1 | Use the "java.time" API for date and time. |
+| 6 | sonarqube(java:S2143)| ParcelService.java:6 | Remove this unused import 'java.util.Date'. |
+| 7 | sonarqube(java:S1068) | ParcelService.java:12 | Remove this unused "maxParcels" private field. |
+| 8 | sonarqube(java:S106) | ParcelService.java:30 | Replace this use of System.out by a logger. |
+| 11 | sonarqube(java:S4973) | ParcelService.java:42 | Strings and Boxed types should be compared using "equals()". |
+| 12 | sonarqube(java:S106) | ParcelService.java:67 | Replace this use of System.out by a logger. |
+| 13 | sonarqube(java:S106) | ParcelService.java:69 | Replace this use of System.out by a logger. |
+| 15 | sonarqube(java:S2095) | ParcelService.java:76 | Use try-with-resources or close this "FileWriter" in a "finally" clause. |
+| 16 | sonarqube(java:S108) | ParcelService.java:80 | Remove this block of code, fill it in, or add a comment explaining why it is empty. |
 
 ## Task 2. AI review of the starter code
 
