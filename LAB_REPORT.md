@@ -97,7 +97,10 @@ Table 3. What you did with each SonarQube issue in Table 1
 
 | No. in Table 1 | Fixed or kept | Commit, or the reason for keeping it |
 | --- | --- | --- |
-| 1 | | |
+| 1 | Kept | System.out.println works perfectly fine for a small console application like ParcelPoint|
+| 2 | Kept | System.out.println works perfectly fine for a small console application like ParcelPoint|
+| 3 | Kept | System.out.println works perfectly fine for a small console application like ParcelPoint|
+| 5 | Fixed | Remove unused import java.util.Date|
 
 Number of SonarQube issues that remain after your fixes:
 
