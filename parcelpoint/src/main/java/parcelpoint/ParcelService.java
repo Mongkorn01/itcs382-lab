@@ -10,9 +10,28 @@ public class ParcelService {
     private List<Parcel> parcels = new ArrayList<>();
 
     public ParcelService() {
-        lockers.add(new Locker(1, 1));
-        lockers.add(new Locker(2, 2));
-        lockers.add(new Locker(3, 3));
+        addLocker(1, 1);
+        addLocker(2, 2);
+        addLocker(3, 3);
+    }
+
+    private void addLocker(int number, int size) {
+        if (number <= 0) {
+            throw new IllegalArgumentException("Locker number must be positive.");
+        }
+
+        if (size <= 0) {
+            throw new IllegalArgumentException("Locker size must be positive.");
+        }
+
+        for (Locker locker : lockers) {
+            if (locker.getNumber() == number) {
+                throw new IllegalArgumentException(
+                        "Duplicate locker number: " + number);
+            }
+        }
+
+        lockers.add(new Locker(number, size));
     }
 
     public List<Locker> getLockers() {
