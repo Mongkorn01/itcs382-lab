@@ -103,6 +103,8 @@ Table 3. What you did with each SonarQube issue in Table 1
 | 4 | Kept | System.out.println works perfectly fine for a small console application like ParcelPoint|
 | 5 | Fixed | Remove unused import java.util.Date|
 | 6 | Fixed | Remove unused maxParcels|
+| 7 | Kept | System.out.println works perfectly fine for a small console application like ParcelPoint|
+| 8 | Fixed | Use equals() for string compare|
 
 Number of SonarQube issues that remain after your fixes:
 
