@@ -120,8 +120,9 @@ Table 3. What you did with each SonarQube issue in Table 1
 | 21 | Kept | The sequence is necessary for the program to work correctly|
 | 22 | Kept | The current way is difficult to change due to couplings with Main.java |
 | 23 | Kept | The current way is difficult to change due to couplings with Main.java |
-| 23 | Kept | The current way is difficult to change due to couplings with Main.java |
-| 23 | Fixed| Reduce coupling by adding countFreeLockers() |
+| 24 | Fixed| Reduce coupling by adding countFreeLockers() |
+| 25 | Kept | The current way is difficult to change due to couplings with Main.java |
+| 26 | Fixed | Add get and set for status to enfore encapsulation |
 
 Number of SonarQube issues that remain after your fixes:
 
