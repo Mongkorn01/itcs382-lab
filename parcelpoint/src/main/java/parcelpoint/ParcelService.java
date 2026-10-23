@@ -70,12 +70,22 @@ public class ParcelService {
     }
 
     private void saveToFile() {
+        FileWriter writer = null;
         try {
-            FileWriter writer = new FileWriter("parcels.csv");
+            writer = new FileWriter("parcels.csv");
             for (Parcel parcel : parcels) {
                 writer.write(parcel.getCode() + "," + parcel.status + "\n");
             }
         } catch (IOException e) {
+        }
+        finally {
+            if (writer != null) {
+                try {
+                    writer.close(); 
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }

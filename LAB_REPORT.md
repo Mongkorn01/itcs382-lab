@@ -105,6 +105,9 @@ Table 3. What you did with each SonarQube issue in Table 1
 | 6 | Fixed | Remove unused maxParcels|
 | 7 | Kept | System.out.println works perfectly fine for a small console application like ParcelPoint|
 | 8 | Fixed | Use equals() for string compare|
+| 9 | Kept | System.out.println works perfectly fine for a small console application like ParcelPoint|
+| 10 | Kept | System.out.println works perfectly fine for a small console application like ParcelPoint|
+| 11 | Fixed | Close file writer with finally clause|
 
 Number of SonarQube issues that remain after your fixes:
 
