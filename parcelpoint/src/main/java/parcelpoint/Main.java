@@ -8,7 +8,7 @@ public class Main {
         Scanner in = new Scanner(System.in);
         System.out.println("Commands: store <code> <studentId> <size 1-3>, pickup <code> <days>, list, staff, quit");
         while (in.hasNextLine()) {
-            String[] words = in.nextLine().trim().split(" ");
+            String[] words = in.nextLine().trim().split("\\s+");            
             if (words[0].equals("store")) {
                 Parcel parcel = new Parcel(words[1], words[2], Integer.parseInt(words[3]));
                 Locker locker = service.storeParcel(parcel);

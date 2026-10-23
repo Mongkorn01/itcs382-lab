@@ -112,6 +112,7 @@ Table 3. What you did with each SonarQube issue in Table 1
 | 13 | Kept | The current using explicit name for convention is good enough|
 | 14 | Kept | For small program, printing for debugging is ok|
 | 15 | Fixed | Add input validation for command parser|
+| 16 | Fixed | Handle many spaces|
 
 
 
