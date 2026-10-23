@@ -71,7 +71,7 @@ Table 2. All findings on the starter code
 | 21 | `ParcelService.java:24–36` | `storeParcel` sequences allocation, status updates, notification, persistence, and returning. | AI | Procedural cohesion | Yes, the behaviour cares about sequence |
 | 22 | `ParcelService.java:64–71` | `printParcels` selects between two display operations based on `forStaff`. | AI | Logical cohesion | Yes, 2 beheavior depends on if-else|
 | 23 | `ParcelService.java:9–80` | `ParcelService` combines locker allocation, parcel tracking, fee calculation, notifications, console output, and file persistence. | AI | Weak class cohesion |Yes, the class does unrelated tasks|
-| 24 | `Main.java:19–22` | `Main` accesses the locker collection through `ParcelService.getLockers()` and inspects individual lockers. | AI | Coupling / Law of Demeter | Yes, it access other files|
+| 24 | `Main.java:19–22` | `Main` accesses the locker collection through `ParcelService.getLockers()` and inspects individual lockers. | AI | Coupling / Law of Demeter | Yes, it gained more information than necessary|
 | 25 | `Main.java:20–21`, `ParcelService.java:64–71` | The `forStaff` boolean determines which display behavior the service performs. | AI | Control coupling |Yes, 2 different behaviours with if-else|
 | 26 | `ParcelService.java:27–28,43–44,67–68`, `Parcel.java:7` | `ParcelService` directly accesses and modifies the public `Parcel.status` field. | AI | Encapsulation / Content coupling |Yes, it should not access attribute directly|
 | 27 | `ParcelService.java:26–28`, `Locker.java:25–26` | `ParcelService` passes a complete `Parcel` object to `Locker`. | AI | Stamp coupling |Yes, it only uses some of the available information|
@@ -113,8 +113,15 @@ Table 3. What you did with each SonarQube issue in Table 1
 | 14 | Kept | For small program, printing for debugging is ok|
 | 15 | Fixed | Add input validation for command parser|
 | 16 | Fixed | Handle many spaces|
-
-
+| 17 | Kept | Overwrite might be the intented action |
+| 18 | Kept | The current way is difficult to change due to couplings with Main.java |
+| 19 | Kept | The current way is difficult to change due to couplings with Main.java |
+| 20 | Kept | The sequence is necessary for the program to work correctly|
+| 21 | Kept | The sequence is necessary for the program to work correctly|
+| 22 | Kept | The current way is difficult to change due to couplings with Main.java |
+| 23 | Kept | The current way is difficult to change due to couplings with Main.java |
+| 23 | Kept | The current way is difficult to change due to couplings with Main.java |
+| 23 | Fixed| Reduce coupling by adding countFreeLockers() |
 
 Number of SonarQube issues that remain after your fixes:
 

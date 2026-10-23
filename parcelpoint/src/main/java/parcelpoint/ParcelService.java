@@ -108,4 +108,10 @@ public class ParcelService {
             }
         }
     }
+
+    public long countFreeLockers() {
+        return lockers.stream()
+                .filter(Locker::isFree)
+                .count();
+    }
 }
