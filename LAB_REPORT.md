@@ -123,6 +123,8 @@ Table 3. What you did with each SonarQube issue in Table 1
 | 24 | Fixed| Reduce coupling by adding countFreeLockers() |
 | 25 | Kept | The current way is difficult to change due to couplings with Main.java |
 | 26 | Fixed | Add get and set for status to enfore encapsulation |
+| 27 | Kept | The current implementation is simple, adding changes might introduce more bugs |
+| 28 | Fixed | Make enum for size, so the name is explicit |
 
 Number of SonarQube issues that remain after your fixes:
 

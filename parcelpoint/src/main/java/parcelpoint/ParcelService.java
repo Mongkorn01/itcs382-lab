@@ -10,18 +10,14 @@ public class ParcelService {
     private List<Parcel> parcels = new ArrayList<>();
 
     public ParcelService() {
-        addLocker(1, 1);
-        addLocker(2, 2);
-        addLocker(3, 3);
+        addLocker(1, LockerSize.SMALL);
+        addLocker(2, LockerSize.MEDIUM);
+        addLocker(3, LockerSize.LARGE);
     }
 
-    private void addLocker(int number, int size) {
+    private void addLocker(int number, LockerSize size) {
         if (number <= 0) {
             throw new IllegalArgumentException("Locker number must be positive.");
-        }
-
-        if (size <= 0) {
-            throw new IllegalArgumentException("Locker size must be positive.");
         }
 
         for (Locker locker : lockers) {
@@ -40,7 +36,7 @@ public class ParcelService {
 
     public Locker storeParcel(Parcel parcel) {
         for (Locker locker : lockers) {
-            if (locker.isFree() && locker.getSize() >= parcel.getSize()) {
+            if (locker.isFree() && getSizeRank(locker.getSize()) >= parcel.getSize()) {
                 locker.setParcel(parcel);
                 parcel.setStatus("STORED");
                 parcels.add(parcel);
@@ -113,5 +109,13 @@ public class ParcelService {
         return lockers.stream()
                 .filter(Locker::isFree)
                 .count();
+    }
+
+    private int getSizeRank(LockerSize size) {
+        return switch (size) {
+            case SMALL -> 1;
+            case MEDIUM -> 2;
+            case LARGE -> 3;
+        };
     }
 }
