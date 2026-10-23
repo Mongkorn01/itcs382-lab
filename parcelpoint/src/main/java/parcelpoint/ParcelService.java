@@ -36,8 +36,7 @@ public class ParcelService {
 
     public Locker storeParcel(Parcel parcel) {
         for (Locker locker : lockers) {
-            if (locker.isFree() && getSizeRank(locker.getSize()) >= parcel.getSize()) {
-                locker.setParcel(parcel);
+            if (locker.isFree() && locker.getSize().canFit(parcel.getSize())) {                locker.setParcel(parcel);
                 parcel.setStatus("STORED");
                 parcels.add(parcel);
                 System.out.println("SMS to " + parcel.getStudentId() + ": parcel "
@@ -66,12 +65,13 @@ public class ParcelService {
         if (days <= 3) {
             return 0;
         }
-        if (parcel.getSize() == 1) {
+        if (parcel.getSize() == LockerSize.SMALL) {
             return (days - 3) * 10.0;
-        } else if (parcel.getSize() == 2) {
+        } else if (parcel.getSize() == LockerSize.MEDIUM) {
             return (days - 3) * 15.0;
+        } else {
+            return (days - 3) * 20.0;
         }
-        return (days - 3) * 20.0;
     }
 
     public void printParcels(boolean forStaff) {
@@ -111,11 +111,4 @@ public class ParcelService {
                 .count();
     }
 
-    private int getSizeRank(LockerSize size) {
-        return switch (size) {
-            case SMALL -> 1;
-            case MEDIUM -> 2;
-            case LARGE -> 3;
-        };
-    }
 }

@@ -76,7 +76,7 @@ Table 2. All findings on the starter code
 | 26 | `ParcelService.java:27–28,43–44,67–68`, `Parcel.java:7` | `ParcelService` directly accesses and modifies the public `Parcel.status` field. | AI | Encapsulation / Content coupling |Yes, it should not access attribute directly|
 | 27 | `ParcelService.java:26–28`, `Locker.java:25–26` | `ParcelService` passes a complete `Parcel` object to `Locker`. | AI | Stamp coupling |Yes, it only uses some of the available information|
 | 28 | `ParcelService.java:28,44,68`, `Parcel.java:13` | Status values depend on matching string literals across classes and methods. | AI | Connascence of convention |Yes, it uses a string with different semantics|
-| 29 | `Locker.java:5`, `Parcel.java:6`, `ParcelService.java:26,56–61`, `Main.java:9` | Locker and parcel sizes use numeric codes whose meanings must remain consistent across several locations. | AI | Connascence of convention |Yes,the number to meaning must be remembered|
+| 29 | `Locker.java:5`, `Parcel.java:6`, `ParcelService.java:26,56–61`, `Main.java:9` | Locker and parcel sizes use numeric codes whose meanings must remain consistent across several locations. | AI | Connascence of convention | Yes,the number to meaning must be remembered|
 | 30 | `ParcelService.java:20–21` | `getLockers` returns the mutable internal collection, allowing callers to add or remove lockers. | AI | Encapsulation / Mutable collection exposure |Yes, it returns a whole list, allowing modifications.|
 | 31 | `Parcel.java:7` | The `status` field is public, allowing callers to assign arbitrary values and bypass state validation. | AI | Encapsulation |Yes, it is modification if refers directly|
 
@@ -124,7 +124,8 @@ Table 3. What you did with each SonarQube issue in Table 1
 | 25 | Kept | The current way is difficult to change due to couplings with Main.java |
 | 26 | Fixed | Add get and set for status to enfore encapsulation |
 | 27 | Kept | The current implementation is simple, adding changes might introduce more bugs |
-| 28 | Fixed | Make enum for size, so the name is explicit |
+| 28-29 | Fixed | Make enum for size of locker and parcel, so the name is explicit |
+
 
 Number of SonarQube issues that remain after your fixes:
 
