@@ -125,20 +125,38 @@ Table 3. What you did with each SonarQube issue in Table 1
 | 26 | Fixed | Add get and set for status to enfore encapsulation |
 | 27 | Kept | The current implementation is simple, adding changes might introduce more bugs |
 | 28-29 | Fixed | Make enum for size of locker and parcel, so the name is explicit |
+| 30 | Kept | The current implementation is simple, adding changes might introduce more bugs|
+| 31 | Fixed | The get and set method is added on step 26|
 
 
-Number of SonarQube issues that remain after your fixes:
+Number of SonarQube issues that remain after your fixes: 10
 
 The two design problems that you fixed
+- Parcel and Locked size was in number instead of explicit name
+- No input validation for add Locker
 
 | Design problem (course term) | What you changed | Commit |
 | --- | --- | --- |
-| | | |
-| | | |
+| Connascence of convention| Replaced numeric parcel and locker sizes with a LockerSize enum (SMALL, MEDIUM, LARGE) so their meanings are explicit.| 3743803 |
+| Content coupling | Added getter and setter methods for parcel status instead of accessing the field directly. |72a3556 |
+|Coupling / Law of Demeter|Added countFreeLockers() to ParcelService so Main doesn't need to access the locker collection to count free lockers.|55697ce|
 
 Output of the program after your fixes, for the commands `store P1 6501 2`, `pickup P1 5` and `staff`, and the content of parcels.csv:
 
 ```text
+Commands: store <code> <studentId> <size 1-3>, pickup <code> <days>, list, staff, quit
+store P1 6501 2
+SMS to 6501: parcel P1 is in locker 2
+Locker 2
+pickup P1 5
+Fee: 30.0
+staff
+P1 6501 PICKED_UP
+Free lockers: 3
+quit
+
+parcels.csv:
+P1,PICKED_UP
 
 ```
 
