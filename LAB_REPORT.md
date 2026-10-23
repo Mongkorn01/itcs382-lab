@@ -59,7 +59,7 @@ Table 2. All findings on the starter code
 | 9 | `ParcelService.java:67` | Replace this use of `System.out` by a logger. | SonarQube | `java:S106` |No, "System.out.println" works just fine.|
 | 10 | `ParcelService.java:69` | Replace this use of `System.out` by a logger. | SonarQube | `java:S106` |No, "System.out.println" works just fine.|
 | 11 | `ParcelService.java:76` | Use try-with-resources or close this `FileWriter` in a `finally` clause. |Both | `java:S2095` |Yes,the file writer is not closed.|
-| 12 | `ParcelService.java:80` | Remove this block of code, fill it in, or add a comment explaining why it is empty. | Both | `java:S108` |Yes, it is better if there is an explanation.|
+| 12 | `ParcelService.java:80` | Remove this block of code, fill it in, or add a comment explaining why it is empty. | Both | `java:S108` |Yes, it is better if there is an explanation for errors.|
 | 13 | `ParcelService.java:28,44,68` | Parcel statuses are represented by repeated string literals, making spelling inconsistencies and invalid states easier to introduce. | AI | Connascence of convention |Yes, this makes it harder to make changes|
 | 14 | `ParcelService.java:30–32` | `storeParcel` combines locker allocation, parcel-state changes, notification, persistence, and returning the result. | AI | Method cohesion / Single responsibility |Yes, the functions should do only one thing.|
 | 15 | `Main.java:11–17` | The command parser assumes valid input lengths and numeric arguments, so malformed commands can cause index errors or `NumberFormatException`. | AI | Input validation / Robustness |Yes, it is missing input validation.|
@@ -108,6 +108,7 @@ Table 3. What you did with each SonarQube issue in Table 1
 | 9 | Kept | System.out.println works perfectly fine for a small console application like ParcelPoint|
 | 10 | Kept | System.out.println works perfectly fine for a small console application like ParcelPoint|
 | 11 | Fixed | Close file writer with finally clause|
+| 12 | Fixed | Add a stack trace for errors|
 
 Number of SonarQube issues that remain after your fixes:
 
