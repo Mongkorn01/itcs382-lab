@@ -229,6 +229,6 @@ BikeShare lends bikes at three campus stations, Library, Canteen and Dorm, and e
 
 | AI tool and exact model | Purpose | Files or parts that it produced or changed | How you checked its output |
 | --- | --- | --- | --- |
-| ChatGPT (GPT-6)  | Combining tables | Task 2 | Quick look if the tables covers everything |
-| ChatGPT (GPT-6)  | Debugging | Task 3 | Checks logic and if the code make sense & if the compilation is successful |
-| ChatGPT (GPT-6)  | Mandatory tasks | Task 2, 4 | Checks if AI reviews make sense & if the compilation is successful |
+| ChatGPT (GPT-6)  | Combining tables | Task 2 | Quick look if the tables covers everything. I still need to do the ctual analysis by myself. |
+| ChatGPT (GPT-6)  | Debugging | Task 3 | Checks logic and if the code make sense and if the compilation is successful. I still need to make changes and keep fixing until the code is correct. |
+| ChatGPT (GPT-6)  | Mandatory tasks | Task 2, 4 | Checks if AI reviews make sense & if the compilation is successful. I still must check AI correctness by myself. |
