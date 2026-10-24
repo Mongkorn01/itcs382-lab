@@ -164,33 +164,71 @@ P1,PICKED_UP
 
 | Item | bikeshare-poor | bikeshare-good |
 | --- | --- | --- |
-| Date | | |
-| AI tool and exact model | | |
-| Prompt (B or C as given, or your changed prompt in full) | | |
-| Builds with mvn package (yes or no) | | |
-| Number of classes, interfaces, enums and records | | |
-| SonarQube issues, total | | |
-| SonarQube issues, by rule | | |
-| AI review findings in Check 1 | | |
-| AI review findings in Check 2 | | |
-| Review output file in the reviews folder | | |
+| Date | 25 October 2026|  25 October 2026|
+| AI tool and exact model |ChatGPT (GPT-6) |ChatGPT (GPT-6) |
+| Prompt (B or C as given, or your changed prompt in full) | Write a Java 17 command-line program, built with Maven and with no external library, for the specification below. Give it a poor design on purpose. Put the menu, the fee rules, the bike records and the file saving into as few classes as possible, keep shared data in public static fields, use int codes for the member types, and pass a boolean flag that changes what a method does. Keep the code itself tidy, so close every file, handle every exception and leave no unused code. Keep the program short. Give me the pom.xml and every Java file.
+
+Specification:
+BikeShare lends bikes at three campus stations, Library, Canteen and Dorm, and each station starts with two bikes.
+1. A member rents an available bike at a station by entering the member ID, the member type (student or staff) and the station.
+2. The member returns the bike at any station and enters the ride time in minutes.
+3. The fee is 2 baht per minute for a student and 3 baht per minute for a staff member.
+4. The program prints a receipt with the bike, the minutes and the fee.
+5. The program adds every finished ride to the file rides.csv.
+6. The program reads commands from the keyboard until the user types quit.| Write a Java 17 command-line program, built with Maven and with no external library, for the specification below. Design it for high cohesion and low coupling. Give each class one responsibility, keep every field private, pass each method only the data it needs, use an enum for the member types, hide the file saving behind an interface, and keep the menu apart from the classes that hold the rules. Keep the code tidy and the program short. Give me the pom.xml and every Java file.
+
+Specification:
+BikeShare lends bikes at three campus stations, Library, Canteen and Dorm, and each station starts with two bikes.
+1. A member rents an available bike at a station by entering the member ID, the member type (student or staff) and the station.
+2. The member returns the bike at any station and enters the ride time in minutes.
+3. The fee is 2 baht per minute for a student and 3 baht per minute for a staff member.
+4. The program prints a receipt with the bike, the minutes and the fee.
+5. The program adds every finished ride to the file rides.csv.
+6. The program reads commands from the keyboard until the user types quit.|
+| Builds with mvn package (yes or no) | yes|yes |
+| Number of classes, interfaces, enums and records | 2 | 10 |
+| SonarQube issues, total | 30 | 13 |
+| SonarQube issues, by rule | 6 | 1 |
+| AI review findings in Check 1 | 10 | 12 |
+| AI review findings in Check 2 | 13 | 17 |
+| Review output file in the reviews folder | yes | yes |
 
 4.1 Did SonarQube report any cohesion or coupling problem in bikeshare-poor? Quote the rule and the message if it did.
+1. Method cohesion: main has procedural cohesion: its actions are organized as a sequence of startup, execution, and cleanup steps.
+2. Method cohesion: run has logical cohesion: it groups different command-handling operations and selects among them based on the command string.
+3. Method cohesion: processRide has logical cohesion: the returning flag selects between two distinct workflows, rental and return, which perform different operations.
+4. Class cohesion: BikeShare combines application-wide data, interactive input/output, rental and return rules, fee calculation, and file persistence, representing several responsibilities in one class.
+5. Class cohesion: Bike exposes data fields but has no behavior for maintaining its own rental-state invariants, leaving state changes to BikeShare
+6. Coupling: BikeShare directly reads and modifies Bike fields, creating content coupling between the two classes.
+7. Coupling: saveRide receives an entire Bike object but uses only selected fields, creating stamp coupling through the composite object parameter.
+8. Coupling: BikeShare depends on multiple unrelated APIs for console output, input, collections, filesystem access, file writing, paths, and exception handling, increasing the class's dependency surface.
+9. Connascence: The meaning of memberType depends on shared integer constants and conditional logic mapping those integers to student/staff behavior and CSV text, creating connascence of type and connascence of algorithm.
+10. Connascence: The persisted CSV schema depends on the positional correspondence between the header fields and the values written in each record, creating connascence of position.
+11. Connascence: Command names and station names must match the strings used in the input handling, prompts, and lookup logic, creating connascence of name and connascence of convention.
+12. Encapsulation: Mutable internal state is exposed through public fields, allowing external code to bypass validation and invariants.
+13. The class exposes its internal mutable collection directly as a field; callers can modify the inventory without using inventory-management logic.
 
 4.2 Did the AI review tell the two versions apart? Give one finding for bikeshare-poor that does not appear for bikeshare-good.
+- Yes, for example, the CSV fields in bikeshare-poor are written without escaping commas, quotation marks, or newlines in memberId, so certain IDs can corrupt the CSV structure.
 
 4.3 Which version would you rather extend with a new member type, such as a visitor who pays 4 baht per minute, and why?
+- The good version, since the system is more robust and easier to add new  changes.
 
 ## Task 5. Reflection
 
 5.1 What does SonarQube check, and what does it not check? Answer with examples from this lab.
+- SonarQube checks for logic error, unused declaration, and surface level debuggings, but it does not check design quality and efficient error handling.
 
 5.2 When should you not trust the AI review? Give an example from this lab.
+- To trust AI review, we must check the actuak code ourselves. For example, an AI gave a design refactoring by splitting a function into many subfunctions. This maybe useful, but it maybe change the function name, which might introduce a lot of changes to other files and/or increase complexity.
 
 5.3 What will you do differently in Project Phase 2 after this lab?
+- I will thoroughly check both SonarQube review and AI reviews, as well as start early in order to have spare time for quality checks
 
 ## AI usage declaration
 
 | AI tool and exact model | Purpose | Files or parts that it produced or changed | How you checked its output |
 | --- | --- | --- | --- |
-| | | | |
+| ChatGPT (GPT-6)  | Combining tables | Task 2 | Quick look if the tables covers everything |
+| ChatGPT (GPT-6)  | Debugging | Task 3 | Checks logic and if the code make sense & if the compilation is successful |
+| ChatGPT (GPT-6)  | Mandatory tasks | Task 2, 4 | Checks if AI reviews make sense & if the compilation is successful |
